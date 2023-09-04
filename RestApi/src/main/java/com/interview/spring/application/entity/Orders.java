@@ -4,53 +4,67 @@
 package com.interview.spring.application.entity;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Orders")
 public class Orders {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "order_id")
-    private long orderId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "order_id")
+	private long orderId;
 
-    @Column(name = "order_date")
-    private Date orderDate;
+	@Column(name = "order_date")
+	private Date orderDate;
 
-    @Column(name = "order_status")
-    private String orderStatus;
+	@Column(name = "order_status")
+	private String orderStatus;
 
-    // getters and setters
+	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+	private List<Items> items;
 
-    public long getOrderId() {
-        return orderId;
-    }
+	// getters and setters
 
-    public void setOrderId(long orderId) {
-        this.orderId = orderId;
-    }
+	public List<Items> getItems() {
+		return items;
+	}
 
-    public Date getOrderDate() {
-        return orderDate;
-    }
+	public void setItems(List<Items> items) {
+		this.items = items;
+	}
 
-    public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
-    }
+	public long getOrderId() {
+		return orderId;
+	}
 
-    public String getOrderStatus() {
-        return orderStatus;
-    }
+	public void setOrderId(long orderId) {
+		this.orderId = orderId;
+	}
 
-    public void setOrderStatus(String orderStatus) {
-        this.orderStatus = orderStatus;
-    }
+	public Date getOrderDate() {
+		return orderDate;
+	}
+
+	public void setOrderDate(Date orderDate) {
+		this.orderDate = orderDate;
+	}
+
+	public String getOrderStatus() {
+		return orderStatus;
+	}
+
+	public void setOrderStatus(String orderStatus) {
+		this.orderStatus = orderStatus;
+	}
 
 }
